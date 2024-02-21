@@ -2,6 +2,7 @@ import { symbolForWebsocketServer } from '$lib/server/websocket/symbol-for-webso
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { websocketHandlers } from '$lib/server/websocket/websocket-server-handlers.js';
+import { isWebsocketMessage } from '$lib/server/websocket/is-web-socket-message.js';
 
 let websocketServerIsInitialised = false;
 
@@ -28,7 +29,7 @@ export const startWebsocketServer = () => {
 					arg0: string,
 					arg1: (webSocket: {
 						send: (arg0: string) => void;
-						on: (arg0: string, arg1: () => void) => void;
+						on: (arg0: string, arg1: (data: string) => void) => void;
 						socketID: string;
 					}) => void
 				): unknown;
@@ -41,7 +42,7 @@ export const startWebsocketServer = () => {
 			'connection',
 			(webSocket: {
 				send: (arg0: string) => void;
-				on: (arg0: string, arg1: () => void) => void;
+				on: (arg0: string, arg1: (data: string) => void) => void;
 				socketID: string;
 			}) => {
 				// This is where you can authenticate the client from the request
@@ -66,7 +67,9 @@ export const startWebsocketServer = () => {
 				webSocket.on('message', (rawData) => {
 					const data = JSON.parse(rawData);
 
-					websocketHandlers[data.type](data, webSocket.socketID);
+					if (isWebsocketMessage(data)) {
+						websocketHandlers[data.type](data, webSocket.socketID);
+					}
 				});
 			}
 		);

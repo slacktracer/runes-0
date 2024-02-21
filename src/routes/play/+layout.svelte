@@ -17,16 +17,12 @@
 	const websocket = connectToWebsocket();
 
 	setTimeout(() => {
-		websocket?.send(JSON.stringify({ type: 'thing', value: 'data web stuff' }));
+		websocket?.send(JSON.stringify({ type: 'test', value: 'data web stuff' }));
 	}, 1000);
 </script>
 
 <main>
 	<h1>SvelteKit with WebSocket Integration</h1>
-
-	<!--	<button disabled={webSocketEstablished} on:click={() => establishWebSocket()}>-->
-	<!--		Establish WebSocket connection-->
-	<!--	</button>-->
 
 	<button on:click={() => requestData()}>
 		Request Data from GET endpoint
