@@ -14,7 +14,11 @@
 		logEvent(`[GET] data received: ${JSON.stringify(data)}`);
 	};
 
-	connectToWebsocket();
+	const websocket = connectToWebsocket();
+
+	setTimeout(() => {
+		websocket?.send(JSON.stringify({ type: 'thing', value: 'data web stuff' }));
+	}, 1000);
 </script>
 
 <main>
@@ -35,11 +39,11 @@
 	</ul>
 </main>
 
-<style>
-    main {
-        font-family: sans-serif;
-    }
-</style>
-
 layout here
 <slot />
+
+<style>
+	main {
+		font-family: sans-serif;
+	}
+</style>

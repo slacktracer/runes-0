@@ -10,3 +10,5 @@ createWebsocketServerGlobalInstance();
 const { server } = await import(resolve(directory, '../build/index.js'));
 
 server.server.on('upgrade', onHttpServerUpgrade);
+
+import './lib/server/websocket/websocket-server-handlers.js';

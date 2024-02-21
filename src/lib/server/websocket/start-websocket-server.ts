@@ -1,6 +1,7 @@
 import { symbolForWebsocketServer } from '$lib/server/websocket/symbol-for-websocket-server.js';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
+import { websocketHandlers } from '$lib/server/websocket/websocket-server-handlers.js';
 
 let websocketServerIsInitialised = false;
 
@@ -60,6 +61,12 @@ export const startWebsocketServer = () => {
 					console.log(
 						`webSocketServer:global] client disconnected (${webSocket.socketID})`
 					);
+				});
+
+				webSocket.on('message', (rawData) => {
+					const data = JSON.parse(rawData);
+
+					websocketHandlers[data.type](data, webSocket.socketID);
 				});
 			}
 		);
