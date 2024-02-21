@@ -18,19 +18,13 @@ export const connectToWebsocket = () => {
 		webSocketEstablished = true;
 
 		console.log('[websocket] connection open', event);
-
-		// logEvent('[websocket] connection open');
 	});
 
 	websocket.addEventListener('close', (event) => {
 		console.log('[websocket] connection closed', event);
-
-		// logEvent('[websocket] connection closed');
 	});
 
 	websocket.addEventListener('message', (event) => {
 		console.log('[websocket] message received', event);
-
-		// logEvent(`[websocket] message received: ${event.data}`);
 	});
 };
