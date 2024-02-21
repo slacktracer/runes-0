@@ -37,6 +37,7 @@
 	"type": "module",
 	"dependencies": {
 		"nanoid": "^5.0.6",
+		"tsx": "^4.7.1",
 		"ws": "^8.16.0"
 	}
 }
