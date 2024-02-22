@@ -25,7 +25,7 @@ export const connectToWebsocket = () => {
 	});
 
 	websocket.addEventListener('message', (event) => {
-		console.log('[websocket] message received', event);
+		console.log('[websocket] message received', JSON.parse(event?.data));
 	});
 
 	return websocket;

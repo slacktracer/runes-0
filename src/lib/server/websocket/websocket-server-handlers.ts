@@ -4,8 +4,6 @@ import type { Duplex } from 'stream';
 
 export const websocketHandlers = {
 	test: (data: unknown, socketID: string) => {
-		console.log('test', data);
-
 		setTimeout(() => {
 			(
 				globalThis as typeof globalThis & {
@@ -25,8 +23,8 @@ export const websocketHandlers = {
 					};
 				}
 			)[symbolForWebsocketServer].clients.forEach((socket) => {
-				if (socket.socketID === socketID) {
-					socket.send('OK');
+				if (socket.socketID !== socketID) {
+					socket.send(JSON.stringify({ data }));
 				}
 			});
 		}, 1000);

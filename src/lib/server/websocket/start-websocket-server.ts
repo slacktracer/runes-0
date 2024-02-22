@@ -3,6 +3,7 @@ import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { websocketHandlers } from '$lib/server/websocket/websocket-server-handlers.js';
 import { isWebsocketMessage } from '$lib/server/websocket/is-web-socket-message.js';
+import { nanoid } from 'nanoid';
 
 let websocketServerIsInitialised = false;
 
@@ -42,25 +43,25 @@ export const startWebsocketServer = () => {
 			'connection',
 			(webSocket: {
 				send: (arg0: string) => void;
-				on: (arg0: string, arg1: (data: string) => void) => void;
 				socketID: string;
+				on: (arg0: string, arg1: (data: string) => void) => void;
 			}) => {
-				// This is where you can authenticate the client from the request
-				// const session = await getSessionFromCookie(request.headers.cookie || '');
-				// if (!session) webSocket.close(1008, 'User not authenticated');
-				// webSocket.userId = session.userId;
+				webSocket.socketID = nanoid();
 
 				console.log(
-					`webSocketServer:global] client connected (${webSocket.socketID})`
+					`[webSocketServer:global] client connected (${webSocket.socketID})`
 				);
 
 				webSocket.send(
-					`Hello from SvelteKit ${new Date().toLocaleString()} (${webSocket.socketID})]`
+					JSON.stringify({
+						socketID: webSocket.socketID,
+						now: new Date().toISOString()
+					})
 				);
 
 				webSocket.on('close', () => {
 					console.log(
-						`webSocketServer:global] client disconnected (${webSocket.socketID})`
+						`[webSocketServer:global] client disconnected (${webSocket.socketID})`
 					);
 				});
 
