@@ -1,13 +1,22 @@
 let webSocketEstablished = false;
 let websocket: WebSocket | null = null;
+let running = false;
+
+import { local } from '$lib/useLocalStore.js';
 
 export const connectToWebsocket = () => {
 	if (typeof window === 'undefined') {
 		return;
 	}
 
+	if (running) {
+		return websocket;
+	}
+
+	running = true;
+
 	if (webSocketEstablished) {
-		return;
+		return websocket;
 	}
 
 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -25,7 +34,19 @@ export const connectToWebsocket = () => {
 	});
 
 	websocket.addEventListener('message', (event) => {
-		console.log('[websocket] message received', JSON.parse(event?.data));
+		const parsed = JSON.parse(event?.data);
+		console.log('[websocket] message received', parsed);
+
+		if (parsed.data?.type === 'increment') {
+			console.log(parsed);
+			local.update((state) => {
+				state.value += 1;
+
+				console.log(state);
+
+				return state;
+			});
+		}
 	});
 
 	return websocket;
