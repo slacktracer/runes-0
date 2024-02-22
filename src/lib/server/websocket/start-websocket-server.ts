@@ -5,6 +5,7 @@ import { websocketHandlers } from './websocket-server-handlers.js';
 import { isWebsocketMessage } from './is-web-socket-message.js';
 import { nanoid } from 'nanoid';
 import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
+import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID.js';
 
 let websocketServerIsInitialised = false;
 
@@ -18,41 +19,36 @@ export const startWebsocketServer = () => {
 	];
 
 	if (websocketServer !== undefined) {
-		websocketServer.on(
-			'connection',
-			(webSocket: {
-				send: (arg0: string) => void;
-				socketID: string;
-				on: (arg0: string, arg1: (data: string) => void) => void;
-			}) => {
-				webSocket.socketID = nanoid();
+		websocketServer.on('connection', (webSocket: WebSocketPlusSocketID) => {
+			webSocket.socketID = nanoid();
 
+			console.log(
+				`[webSocketServer:global] client connected (${webSocket.socketID})`
+			);
+
+			webSocket.send(
+				JSON.stringify({
+					socketID: webSocket.socketID,
+					now: new Date().toISOString()
+				})
+			);
+
+			webSocket.on('close', () => {
 				console.log(
-					`[webSocketServer:global] client connected (${webSocket.socketID})`
+					`[webSocketServer:global] client disconnected (${webSocket.socketID})`
 				);
+			});
 
-				webSocket.send(
-					JSON.stringify({
-						socketID: webSocket.socketID,
-						now: new Date().toISOString()
-					})
-				);
-
-				webSocket.on('close', () => {
-					console.log(
-						`[webSocketServer:global] client disconnected (${webSocket.socketID})`
-					);
-				});
-
-				webSocket.on('message', (rawData) => {
+			webSocket.on('message', (rawData) => {
+				if (typeof rawData === 'string') {
 					const data = JSON.parse(rawData);
 
 					if (isWebsocketMessage(data)) {
 						websocketHandlers[data.type](data, webSocket.socketID);
 					}
-				});
-			}
-		);
+				}
+			});
+		});
 
 		websocketServerIsInitialised = true;
 	}

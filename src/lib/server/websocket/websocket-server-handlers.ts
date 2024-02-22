@@ -12,7 +12,7 @@ export const websocketHandlers = {
 		});
 	},
 
-	test: (data: unknown, socketID: string) => {
+	test: (data: unknown, socketID?: string) => {
 		setTimeout(() => {
 			(globalThis as GlobalThisPlusWebSocketServer)[
 				symbolForWebsocketServer
