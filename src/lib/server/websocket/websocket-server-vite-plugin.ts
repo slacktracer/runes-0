@@ -1,5 +1,5 @@
-import { onHttpServerUpgrade } from '$lib/server/websocket/on-http-server-upgrade.js';
-import { createWebsocketServerGlobalInstance } from '$lib/server/websocket/create-websocket-server-global-instance.js';
+import { onHttpServerUpgrade } from './on-http-server-upgrade.js';
+import { createWebsocketServerGlobalInstance } from './create-websocket-server-global-instance.js';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 

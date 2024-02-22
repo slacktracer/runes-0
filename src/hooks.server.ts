@@ -1,31 +1,16 @@
 import type { Handle } from '@sveltejs/kit';
 import { building } from '$app/environment';
-import { startWebsocketServer } from '$lib/server/websocket/start-websocket-server.js';
-import { symbolForWebsocketServer } from '$lib/server/websocket/symbol-for-websocket-server.js';
-import type { IncomingMessage } from 'http';
-import type { Duplex } from 'stream';
+import { startWebsocketServer } from './lib/server/websocket/start-websocket-server.js';
+import { symbolForWebsocketServer } from './lib/server/websocket/symbol-for-websocket-server.js';
+import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
 
 export const handle = (async ({ event, resolve }) => {
 	startWebsocketServer();
 
 	if (!building) {
-		const websocketServer = (
-			globalThis as typeof globalThis & {
-				[symbolForWebsocketServer]: {
-					emit: (
-						eventName: string,
-						webSocket: unknown,
-						request: IncomingMessage
-					) => void;
-					handleUpgrade: (
-						request: IncomingMessage,
-						socket: Duplex,
-						upgradeHead: Buffer,
-						callback: (websocket: unknown) => void
-					) => void;
-				};
-			}
-		)[symbolForWebsocketServer];
+		const websocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+			symbolForWebsocketServer
+		];
 
 		if (websocketServer !== undefined) {
 			// @ts-expect-error Got to find out how to extend event.locals type. But maybe I do not need it for this project.

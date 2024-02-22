@@ -2,6 +2,7 @@ import { parse } from 'url';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { symbolForWebsocketServer } from './symbol-for-websocket-server.js';
+import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
 
 export const onHttpServerUpgrade = (
 	request: IncomingMessage,
@@ -14,23 +15,9 @@ export const onHttpServerUpgrade = (
 		return;
 	}
 
-	const webSocketServer = (
-		globalThis as typeof globalThis & {
-			[symbolForWebsocketServer]: {
-				emit: (
-					eventName: string,
-					webSocket: unknown,
-					request: IncomingMessage
-				) => void;
-				handleUpgrade: (
-					request: IncomingMessage,
-					socket: Duplex,
-					upgradeHead: unknown,
-					callback: (websocket: unknown) => void
-				) => void;
-			};
-		}
-	)[symbolForWebsocketServer];
+	const webSocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+		symbolForWebsocketServer
+	];
 
 	webSocketServer.handleUpgrade(
 		request,

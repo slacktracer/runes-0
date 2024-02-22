@@ -1,4 +1,4 @@
-import { websocketHandlers } from '$lib/server/websocket/websocket-server-handlers.js';
+import { websocketHandlers } from './websocket-server-handlers.js';
 import type { WebsocketMessage } from '../../../types/WebsocketMessage.js';
 
 export const isWebsocketMessage = (
