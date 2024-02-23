@@ -2,7 +2,7 @@ let webSocketEstablished = false;
 let websocket: WebSocket | null = null;
 let running = false;
 
-import { local } from './useLocalStore.js';
+import { local } from './local.js';
 
 export const connectToWebsocket = () => {
 	if (typeof window === 'undefined') {

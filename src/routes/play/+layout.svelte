@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { connectToWebsocket } from '../../lib/connectToWebsocket.js';
+	import { connectToWebsocket } from '../../lib/connect-to-websocket.js';
 
 	let log: string[] = [];
 
