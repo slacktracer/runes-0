@@ -38,8 +38,14 @@ export const startWebsocketServer = () => {
 			});
 
 			webSocket.on('message', (rawData) => {
-				if (typeof rawData === 'string') {
-					const data = JSON.parse(rawData);
+				let rawDataAsString;
+
+				if (rawData instanceof Buffer) {
+					rawDataAsString = rawData.toString();
+				}
+
+				if (typeof rawDataAsString === 'string') {
+					const data = JSON.parse(rawDataAsString);
 
 					if (isWebsocketMessage(data)) {
 						websocketHandlers[data.type](data, webSocket.socketID);
