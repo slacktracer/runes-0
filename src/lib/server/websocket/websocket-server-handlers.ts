@@ -7,9 +7,7 @@ export const websocketHandlers = {
 		(globalThis as GlobalThisPlusWebSocketServer)[
 			symbolForWebsocketServer
 		].clients.forEach((socket) => {
-			// if (socket.socketID !== socketID) {
 			socket.send(JSON.stringify({ data }));
-			// }
 		});
 	},
 
