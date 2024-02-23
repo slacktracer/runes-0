@@ -1,6 +1,6 @@
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
-import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
 
-export const webSocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+export const webSocketServer = (global as GlobalPlusWebSocketServer)[
 	symbolForWebSocketServer
 ];

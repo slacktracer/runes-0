@@ -2,13 +2,13 @@ import type { Handle } from '@sveltejs/kit';
 import { building } from '$app/environment';
 import { startWebSocketServer } from './lib/server/web-socket/start-web-socket-server.js';
 import { symbolForWebSocketServer } from './lib/server/web-socket/symbol-for-web-socket-server.js';
-import type { GlobalThisPlusWebSocketServer } from './lib/server/web-socket/types/GlobalThisPlusWebSocketServer.js';
+import type { GlobalPlusWebSocketServer } from './lib/server/web-socket/types/GlobalPlusWebSocketServer.js';
 
 export const handle = (async ({ event, resolve }) => {
 	startWebSocketServer();
 
 	if (!building) {
-		const websocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+		const websocketServer = (global as GlobalPlusWebSocketServer)[
 			symbolForWebSocketServer
 		];
 

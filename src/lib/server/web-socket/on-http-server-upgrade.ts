@@ -2,7 +2,7 @@ import { parse } from 'url';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
-import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
 import type { WebSocketPlusSocketID } from './types/WebSocketPlusSocketID.js';
 
 export const onHttpServerUpgrade = (
@@ -16,7 +16,7 @@ export const onHttpServerUpgrade = (
 		return;
 	}
 
-	const webSocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+	const webSocketServer = (global as GlobalPlusWebSocketServer)[
 		symbolForWebSocketServer
 	];
 

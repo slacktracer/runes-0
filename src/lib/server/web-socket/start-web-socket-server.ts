@@ -2,7 +2,7 @@ import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import { webSocketHandlers } from '../core/web-socket-server-handlers.js';
 import { isWebsocketMessage } from './is-web-socket-message.js';
 import { nanoid } from 'nanoid';
-import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
 import type { WebSocketPlusSocketID } from './types/WebSocketPlusSocketID.js';
 
 let websocketServerIsInitialised = false;
@@ -12,7 +12,7 @@ export const startWebSocketServer = () => {
 		return;
 	}
 
-	const websocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
+	const websocketServer = (global as GlobalPlusWebSocketServer)[
 		symbolForWebSocketServer
 	];
 
