@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { connectToWebsocket } from '../../lib/connect-to-websocket.js';
-
 	let log: string[] = [];
 
 	const logEvent = (str: string) => {
@@ -13,12 +11,6 @@
 
 		logEvent(`[GET] data received: ${JSON.stringify(data)}`);
 	};
-
-	const websocket = connectToWebsocket();
-
-	setTimeout(() => {
-		websocket?.send(JSON.stringify({ type: 'test', value: 'data web stuff' }));
-	}, 1000);
 </script>
 
 <main>

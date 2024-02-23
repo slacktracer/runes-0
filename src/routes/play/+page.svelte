@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { connectToWebsocket } from '../../lib/connect-to-websocket.js';
+	import { connectToWebSocket } from '../../lib/connect-to-web-socket.js';
 	import {local} from "../../lib/local.js"
 
-	const websocket = connectToWebsocket();
+	const webSocket = connectToWebSocket();
 
-	const increment = () => websocket?.send(JSON.stringify({ type: "increment", data: {}}))
+	const increment = () => webSocket?.send(JSON.stringify({ type: "increment", data: {}}))
 </script>
 
 page here

@@ -1,41 +1,41 @@
 let webSocketEstablished = false;
-let websocket: WebSocket | null = null;
+let webSocket: WebSocket | null = null;
 let running = false;
 
 import { local } from './local.js';
 
-export const connectToWebsocket = () => {
+export const connectToWebSocket = () => {
 	if (typeof window === 'undefined') {
 		return;
 	}
 
 	if (running) {
-		return websocket;
+		return webSocket;
 	}
 
 	running = true;
 
 	if (webSocketEstablished) {
-		return websocket;
+		return webSocket;
 	}
 
 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
-	websocket = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+	webSocket = new WebSocket(`${protocol}//${window.location.host}/webSocket`);
 
-	websocket.addEventListener('open', (event) => {
+	webSocket.addEventListener('open', (event) => {
 		webSocketEstablished = true;
 
-		console.log('[websocket] connection open', event);
+		console.log('[webSocket] connection open', event);
 	});
 
-	websocket.addEventListener('close', (event) => {
-		console.log('[websocket] connection closed', event);
+	webSocket.addEventListener('close', (event) => {
+		console.log('[webSocket] connection closed', event);
 	});
 
-	websocket.addEventListener('message', (event) => {
+	webSocket.addEventListener('message', (event) => {
 		const parsed = JSON.parse(event?.data);
-		console.log('[websocket] message received', parsed);
+		console.log('[webSocket] message received', parsed);
 
 		if (parsed.data?.type === 'increment') {
 			console.log(parsed);
@@ -49,5 +49,5 @@ export const connectToWebsocket = () => {
 		}
 	});
 
-	return websocket;
+	return webSocket;
 };

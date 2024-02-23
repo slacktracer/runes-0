@@ -1,7 +1,7 @@
 import { parse } from 'url';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
-import { symbolForWebsocketServer } from './symbol-for-websocket-server.js';
+import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
 import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID.js';
 
@@ -12,12 +12,12 @@ export const onHttpServerUpgrade = (
 ) => {
 	const pathname = request.url ? parse(request.url).pathname : null;
 
-	if (pathname !== '/websocket') {
+	if (pathname !== '/web-socket') {
 		return;
 	}
 
 	const webSocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
-		symbolForWebsocketServer
+		symbolForWebSocketServer
 	];
 
 	webSocketServer.handleUpgrade(

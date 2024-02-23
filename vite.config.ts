@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import { webSocketServerVitePlugin } from './src/lib/server/websocket/web-socket-server-vite-plugin.js';
+import { webSocketServerVitePlugin } from './src/lib/server/web-socket/web-socket-server-vite-plugin.js';
 
 export default defineConfig({
 	plugins: [sveltekit(), webSocketServerVitePlugin],

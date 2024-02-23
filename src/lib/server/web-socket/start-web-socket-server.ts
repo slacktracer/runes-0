@@ -1,5 +1,5 @@
-import { symbolForWebsocketServer } from './symbol-for-websocket-server.js';
-import { websocketHandlers } from './websocket-server-handlers.js';
+import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
+import { webSocketHandlers } from './web-socket-server-handlers.js';
 import { isWebsocketMessage } from './is-web-socket-message.js';
 import { nanoid } from 'nanoid';
 import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
@@ -7,13 +7,13 @@ import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID
 
 let websocketServerIsInitialised = false;
 
-export const startWebsocketServer = () => {
+export const startWebSocketServer = () => {
 	if (websocketServerIsInitialised) {
 		return;
 	}
 
 	const websocketServer = (globalThis as GlobalThisPlusWebSocketServer)[
-		symbolForWebsocketServer
+		symbolForWebSocketServer
 	];
 
 	if (websocketServer !== undefined) {
@@ -48,7 +48,7 @@ export const startWebsocketServer = () => {
 					const data = JSON.parse(rawDataAsString);
 
 					if (isWebsocketMessage(data)) {
-						websocketHandlers[data.type](data, webSocket.socketID);
+						webSocketHandlers[data.type](data, webSocket.socketID);
 					}
 				}
 			});
