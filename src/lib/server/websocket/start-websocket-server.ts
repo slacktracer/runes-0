@@ -1,6 +1,4 @@
 import { symbolForWebsocketServer } from './symbol-for-websocket-server.js';
-import type { IncomingMessage } from 'http';
-import type { Duplex } from 'stream';
 import { websocketHandlers } from './websocket-server-handlers.js';
 import { isWebsocketMessage } from './is-web-socket-message.js';
 import { nanoid } from 'nanoid';

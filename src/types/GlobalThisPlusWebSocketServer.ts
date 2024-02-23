@@ -2,21 +2,11 @@ import { symbolForWebsocketServer } from '../lib/server/websocket/symbol-for-web
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import type { WebSocketPlusSocketID } from './WebSocketPlusSocketID.js';
+import type { WebSocketServer } from 'ws';
 
 export type GlobalThisPlusWebSocketServer = typeof globalThis & {
-	[symbolForWebsocketServer]: {
+	[symbolForWebsocketServer]: WebSocketServer & {
 		clients: Set<WebSocketPlusSocketID>;
-		emit: (
-			eventName: string,
-			webSocket: unknown,
-			request: IncomingMessage
-		) => void;
-		handleUpgrade: (
-			request: IncomingMessage,
-			socket: Duplex,
-			upgradeHead: Buffer,
-			callback: (websocket: WebSocketPlusSocketID) => void
-		) => void;
 		on(arg0: string, arg1: (webSocket: WebSocketPlusSocketID) => void): unknown;
 	};
 };

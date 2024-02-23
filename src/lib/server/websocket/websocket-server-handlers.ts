@@ -1,5 +1,6 @@
 import { symbolForWebsocketServer } from './symbol-for-websocket-server.js';
 import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
+import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID.js';
 
 export const websocketHandlers = {
 	increment: (data: unknown) => {
@@ -16,7 +17,7 @@ export const websocketHandlers = {
 		setTimeout(() => {
 			(globalThis as GlobalThisPlusWebSocketServer)[
 				symbolForWebsocketServer
-			].clients.forEach((socket) => {
+			].clients.forEach((socket: WebSocketPlusSocketID) => {
 				if (socket.socketID !== socketID) {
 					socket.send(JSON.stringify({ data }));
 				}
