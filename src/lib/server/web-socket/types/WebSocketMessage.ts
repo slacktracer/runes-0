@@ -1,4 +1,4 @@
-import { webSocketHandlers } from '../lib/server/web-socket/web-socket-server-handlers.js';
+import { webSocketHandlers } from '../../core/web-socket-server-handlers.js';
 
 export type WebSocketMessage = {
 	data: unknown;

@@ -2,7 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 import { building } from '$app/environment';
 import { startWebSocketServer } from './lib/server/web-socket/start-web-socket-server.js';
 import { symbolForWebSocketServer } from './lib/server/web-socket/symbol-for-web-socket-server.js';
-import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { GlobalThisPlusWebSocketServer } from './lib/server/web-socket/types/GlobalThisPlusWebSocketServer.js';
 
 export const handle = (async ({ event, resolve }) => {
 	startWebSocketServer();

@@ -1,9 +1,9 @@
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
-import { webSocketHandlers } from './web-socket-server-handlers.js';
+import { webSocketHandlers } from '../core/web-socket-server-handlers.js';
 import { isWebsocketMessage } from './is-web-socket-message.js';
 import { nanoid } from 'nanoid';
-import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
-import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID.js';
+import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { WebSocketPlusSocketID } from './types/WebSocketPlusSocketID.js';
 
 let websocketServerIsInitialised = false;
 

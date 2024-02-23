@@ -11,4 +11,4 @@ const { server } = await import(resolve(directory, '../build/index.js'));
 
 server.server.on('upgrade', onHttpServerUpgrade);
 
-import './lib/server/web-socket/web-socket-server-handlers.js';
+import './lib/server/core/web-socket-server-handlers.js';

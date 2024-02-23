@@ -1,5 +1,5 @@
-import { webSocketHandlers } from './web-socket-server-handlers.js';
-import type { WebSocketMessage } from '../../../types/WebSocketMessage.js';
+import { webSocketHandlers } from '../core/web-socket-server-handlers.js';
+import type { WebSocketMessage } from './types/WebSocketMessage.js';
 
 export const isWebsocketMessage = (
 	argument: unknown

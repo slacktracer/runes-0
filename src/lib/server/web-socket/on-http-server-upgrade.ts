@@ -2,8 +2,8 @@ import { parse } from 'url';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
-import type { GlobalThisPlusWebSocketServer } from '../../../types/GlobalThisPlusWebSocketServer.js';
-import type { WebSocketPlusSocketID } from '../../../types/WebSocketPlusSocketID.js';
+import type { GlobalThisPlusWebSocketServer } from './types/GlobalThisPlusWebSocketServer.js';
+import type { WebSocketPlusSocketID } from './types/WebSocketPlusSocketID.js';
 
 export const onHttpServerUpgrade = (
 	request: IncomingMessage,
