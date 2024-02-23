@@ -21,7 +21,7 @@ export const connectToWebSocket = () => {
 
 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
-	webSocket = new WebSocket(`${protocol}//${window.location.host}/webSocket`);
+	webSocket = new WebSocket(`${protocol}//${window.location.host}/connect`);
 
 	webSocket.addEventListener('open', (event) => {
 		webSocketEstablished = true;
@@ -38,11 +38,8 @@ export const connectToWebSocket = () => {
 		console.log('[webSocket] message received', parsed);
 
 		if (parsed.data?.type === 'increment') {
-			console.log(parsed);
 			local.update((state) => {
 				state.value += 1;
-
-				console.log(state);
 
 				return state;
 			});

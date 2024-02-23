@@ -12,7 +12,7 @@ export const onHttpServerUpgrade = (
 ) => {
 	const pathname = request.url ? parse(request.url).pathname : null;
 
-	if (pathname !== '/web-socket') {
+	if (pathname !== '/connect') {
 		return;
 	}
 
