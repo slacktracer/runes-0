@@ -4,8 +4,16 @@ import type { WebSocketServerOnMessageHandlerParameter } from '../web-socket/typ
 let fiftyFirstGame = 0;
 
 export const webSocketServerOnMessageHandlers = {
+	reset: ({ webSocketServer }: WebSocketServerOnMessageHandlerParameter) => {
+		fiftyFirstGame = 0;
+
+		webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
+			socket.send(JSON.stringify({ type: 'increment', value: fiftyFirstGame }));
+		});
+	},
+
 	increment: ({
-		data,
+		// data,
 		webSocket,
 		webSocketServer
 	}: WebSocketServerOnMessageHandlerParameter) => {
@@ -28,7 +36,7 @@ export const webSocketServerOnMessageHandlers = {
 		}
 
 		webSocketServer.clients.forEach((socket) => {
-			socket.send(JSON.stringify({ value: fiftyFirstGame }));
+			socket.send(JSON.stringify({ type: 'increment', value: fiftyFirstGame }));
 		});
 	}
 };

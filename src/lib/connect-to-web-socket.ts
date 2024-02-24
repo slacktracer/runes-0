@@ -37,9 +37,9 @@ export const connectToWebSocket = () => {
 		const parsed = JSON.parse(event?.data);
 		console.log('[webSocket] message received', parsed);
 
-		if (parsed.data?.type === 'increment') {
+		if (parsed.type === 'increment') {
 			local.update((state) => {
-				state.value += 1;
+				state.value = parsed.value;
 
 				return state;
 			});
