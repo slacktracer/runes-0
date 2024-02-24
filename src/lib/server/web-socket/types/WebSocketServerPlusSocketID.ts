@@ -5,7 +5,6 @@ export type WebSocketServerPlusSocketID = WebSocketServer & {
 	clients: Set<WebSocketPlusSocketID>;
 	on(
 		callback: (webSocket: WebSocketPlusSocketID) => void,
-		eventName: string,
 		handleUpgrade: (client: WebSocketPlusSocketID, request: Request) => void
 	): unknown;
 };
