@@ -1,0 +1,34 @@
+import type { WebSocketPlusSocketID } from '../web-socket/types/WebSocketPlusSocketID.js';
+import type { WebSocketServerOnMessageHandlerParameter } from '../web-socket/types/WebSocketServerOnMessageHandlerParameter.js';
+
+let fiftyFirstGame = 0;
+
+export const webSocketServerOnMessageHandlers = {
+	increment: ({
+		data,
+		webSocket,
+		webSocketServer
+	}: WebSocketServerOnMessageHandlerParameter) => {
+		const { socketID } = webSocket;
+
+		fiftyFirstGame += 1;
+
+		if (fiftyFirstGame === 50) {
+			webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
+				if (socket.socketID !== socketID) {
+					socket.send(JSON.stringify({ result: 'you won', won: false }));
+				}
+
+				if (socket.socketID === socketID) {
+					socket.send(JSON.stringify({ result: 'you won', won: true }));
+				}
+
+				fiftyFirstGame = 0;
+			});
+		}
+
+		webSocketServer.clients.forEach((socket) => {
+			socket.send(JSON.stringify({ value: fiftyFirstGame }));
+		});
+	}
+};

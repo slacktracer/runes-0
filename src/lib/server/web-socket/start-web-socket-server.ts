@@ -15,12 +15,12 @@ export const startWebSocketServer = ({
 		return;
 	}
 
-	const websocketServer = (global as GlobalPlusWebSocketServer)[
+	const webSocketServer = (global as GlobalPlusWebSocketServer)[
 		symbolForWebSocketServer
 	];
 
-	if (websocketServer !== undefined) {
-		websocketServer.on('connection', (webSocket: WebSocketPlusSocketID) => {
+	if (webSocketServer !== undefined) {
+		webSocketServer.on('connection', (webSocket: WebSocketPlusSocketID) => {
 			webSocket.socketID = nanoid();
 
 			console.log(`[webSocketServer] client connected (${webSocket.socketID})`);
@@ -38,7 +38,9 @@ export const startWebSocketServer = ({
 				);
 			});
 
-			webSocket.on('message', handlers.onMessage);
+			webSocket.on('message', (rawData) => {
+				handlers.onMessage({ rawData, webSocket, webSocketServer });
+			});
 		});
 
 		websocketServerIsInitialised = true;

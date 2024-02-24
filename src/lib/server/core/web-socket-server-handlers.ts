@@ -1,31 +1,25 @@
-import { webSocketServer } from '../web-socket/web-socket-server.js';
-import type { WebSocketPlusSocketID } from '../web-socket/types/WebSocketPlusSocketID.js';
 import type { WebSocketServerHandlers } from '../web-socket/types/WebSockerServerHandlers.js';
-
-let fiftyFirstGame = 0;
-
-export const handlers = {
-	increment: (data: unknown, socketID: string) => {
-		fiftyFirstGame += 1;
-
-		if (fiftyFirstGame === 50) {
-			webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
-				if (socket.socketID === socketID) {
-					socket.send(JSON.stringify({ result: 'you won', won: true }));
-				}
-			});
-		}
-
-		webSocketServer.clients.forEach((socket) => {
-			socket.send(JSON.stringify({ data }));
-		});
-	}
-};
+import { isWebsocketMessage } from '../web-socket/is-websocket-message.js';
+import { webSocketServerOnMessageHandlers } from './web-socket-server-on-message-handlers.js';
 
 export const webSocketServerHandlers: WebSocketServerHandlers = {
-	onMessage: (data: { type: keyof typeof handlers }, socketID: string) => {
-		if (data && typeof data === 'object' && 'type' in data) {
-			handlers[data.type](data, socketID);
+	onMessage: ({ rawData, webSocket, webSocketServer }) => {
+		let rawDataAsString;
+
+		if (rawData instanceof Buffer) {
+			rawDataAsString = rawData.toString();
+		}
+
+		if (typeof rawDataAsString === 'string') {
+			const data = JSON.parse(rawDataAsString);
+
+			if (isWebsocketMessage(data)) {
+				webSocketServerOnMessageHandlers[data.type]({
+					data,
+					webSocket,
+					webSocketServer
+				});
+			}
 		}
 	}
 };
