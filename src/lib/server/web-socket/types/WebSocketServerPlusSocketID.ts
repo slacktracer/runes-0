@@ -4,7 +4,8 @@ import type { WebSocketPlusSocketID } from './WebSocketPlusSocketID.js';
 export type WebSocketServerPlusSocketID = WebSocketServer & {
 	clients: Set<WebSocketPlusSocketID>;
 	on(
+		callback: (webSocket: WebSocketPlusSocketID) => void,
 		eventName: string,
-		callback: (webSocket: WebSocketPlusSocketID) => void
+		handleUpgrade: (client: WebSocketPlusSocketID, request: Request) => void
 	): unknown;
 };

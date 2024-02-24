@@ -3,7 +3,6 @@ import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
-import type { WebSocketPlusSocketID } from './types/WebSocketPlusSocketID.js';
 
 export const onHttpServerUpgrade = (
 	request: IncomingMessage,
@@ -24,7 +23,7 @@ export const onHttpServerUpgrade = (
 		request,
 		socket,
 		upgradeHead,
-		(webSocket: WebSocketPlusSocketID) => {
+		(webSocket: unknown) => {
 			webSocketServer.emit('connection', webSocket, request);
 		}
 	);
