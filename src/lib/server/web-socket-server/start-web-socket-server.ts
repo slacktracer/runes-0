@@ -7,9 +7,9 @@ import type { WebSocketServerHandlers } from './types/WebSockerServerHandlers.js
 let websocketServerIsInitialised = false;
 
 export const startWebSocketServer = ({
-	handlers
+	webSocketServerHandlers
 }: {
-	handlers: WebSocketServerHandlers;
+	webSocketServerHandlers: WebSocketServerHandlers;
 }) => {
 	if (websocketServerIsInitialised) {
 		return;
@@ -39,7 +39,11 @@ export const startWebSocketServer = ({
 			});
 
 			webSocket.on('message', (rawData) => {
-				handlers.onMessage({ rawData, webSocket, webSocketServer });
+				webSocketServerHandlers.onMessage({
+					rawData,
+					webSocket,
+					webSocketServer
+				});
 			});
 		});
 
