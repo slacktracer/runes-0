@@ -4,7 +4,7 @@ let running = false;
 
 import { local } from './local.js';
 
-export const connectToWebSocket = () => {
+export const connectToWebSocketServer = () => {
 	if (typeof window === 'undefined') {
 		return;
 	}
