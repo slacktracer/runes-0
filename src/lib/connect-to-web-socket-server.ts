@@ -2,50 +2,50 @@ let openingWebSocket = false;
 let webSocket: WebSocket | null = null;
 let webSocketEstablished = false;
 
-import { local } from './local.js';
+import { local } from "./local.js";
 
 export const connectToWebSocketServer = () => {
-	if (typeof window === 'undefined') {
-		return;
-	}
+  if (typeof window === "undefined") {
+    return;
+  }
 
-	if (openingWebSocket) {
-		return webSocket;
-	}
+  if (openingWebSocket) {
+    return webSocket;
+  }
 
-	openingWebSocket = true;
+  openingWebSocket = true;
 
-	if (webSocketEstablished) {
-		return webSocket;
-	}
+  if (webSocketEstablished) {
+    return webSocket;
+  }
 
-	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
-	webSocket = new WebSocket(`${protocol}//${window.location.host}/connect`);
+  webSocket = new WebSocket(`${protocol}//${window.location.host}/connect`);
 
-	webSocket.addEventListener('open', (event) => {
-		webSocketEstablished = true;
+  webSocket.addEventListener("open", (event) => {
+    webSocketEstablished = true;
 
-		openingWebSocket = false;
+    openingWebSocket = false;
 
-		console.log('[webSocket] connection open', event);
-	});
+    console.log("[webSocket] connection open", event);
+  });
 
-	webSocket.addEventListener('close', (event) => {
-		console.log('[webSocket] connection closed', event);
-	});
+  webSocket.addEventListener("close", (event) => {
+    console.log("[webSocket] connection closed", event);
+  });
 
-	webSocket.addEventListener('message', (event) => {
-		const parsedData = JSON.parse(event?.data);
+  webSocket.addEventListener("message", (event) => {
+    const parsedData = JSON.parse(event?.data);
 
-		if (parsedData.type === 'increment') {
-			local.update((state) => {
-				state.value = parsedData.value;
+    if (parsedData.type === "increment") {
+      local.update((state) => {
+        state.value = parsedData.value;
 
-				return state;
-			});
-		}
-	});
+        return state;
+      });
+    }
+  });
 
-	return webSocket;
+  return webSocket;
 };

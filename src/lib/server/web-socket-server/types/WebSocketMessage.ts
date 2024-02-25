@@ -1,6 +1,6 @@
-import { webSocketServerOnMessageHandlers } from '../../core/web-socket-server-on-message-handlers.js';
+import { webSocketServerOnMessageHandlers } from "../../core/web-socket-server-on-message-handlers.js";
 
 export type WebSocketMessage = {
-	data: unknown;
-	type: keyof typeof webSocketServerOnMessageHandlers;
+  data: unknown;
+  type: keyof typeof webSocketServerOnMessageHandlers;
 };

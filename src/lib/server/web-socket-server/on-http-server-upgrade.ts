@@ -1,31 +1,31 @@
-import type { IncomingMessage } from 'http';
-import type { Duplex } from 'stream';
-import { parse } from 'url';
+import type { IncomingMessage } from "http";
+import type { Duplex } from "stream";
+import { parse } from "url";
 
-import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
-import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
+import { symbolForWebSocketServer } from "./symbol-for-web-socket-server.js";
+import type { GlobalPlusWebSocketServer } from "./types/GlobalPlusWebSocketServer.js";
 
 export const onHttpServerUpgrade = (
-	request: IncomingMessage,
-	socket: Duplex,
-	upgradeHead: Buffer
+  request: IncomingMessage,
+  socket: Duplex,
+  upgradeHead: Buffer,
 ) => {
-	const pathname = request.url ? parse(request.url).pathname : null;
+  const pathname = request.url ? parse(request.url).pathname : null;
 
-	if (pathname !== '/connect') {
-		return;
-	}
+  if (pathname !== "/connect") {
+    return;
+  }
 
-	const webSocketServer = (global as GlobalPlusWebSocketServer)[
-		symbolForWebSocketServer
-	];
+  const webSocketServer = (global as GlobalPlusWebSocketServer)[
+    symbolForWebSocketServer
+  ];
 
-	webSocketServer.handleUpgrade(
-		request,
-		socket,
-		upgradeHead,
-		(webSocket: unknown) => {
-			webSocketServer.emit('connection', webSocket, request);
-		}
-	);
+  webSocketServer.handleUpgrade(
+    request,
+    socket,
+    upgradeHead,
+    (webSocket: unknown) => {
+      webSocketServer.emit("connection", webSocket, request);
+    },
+  );
 };

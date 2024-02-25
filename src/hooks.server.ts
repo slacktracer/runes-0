@@ -1,14 +1,14 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from "@sveltejs/kit";
 
-import { webSocketServerHandlers } from './lib/server/core/web-socket-server-handlers.js';
-import { startWebSocketServer } from './lib/server/web-socket-server/start-web-socket-server.js';
+import { webSocketServerHandlers } from "./lib/server/core/web-socket-server-handlers.js";
+import { startWebSocketServer } from "./lib/server/web-socket-server/start-web-socket-server.js";
 
 export const handle = (async ({ event, resolve }) => {
-	startWebSocketServer({ webSocketServerHandlers });
+  startWebSocketServer({ webSocketServerHandlers });
 
-	const response = await resolve(event, {
-		filterSerializedResponseHeaders: (name) => name === 'content-type'
-	});
+  const response = await resolve(event, {
+    filterSerializedResponseHeaders: (name) => name === "content-type",
+  });
 
-	return response;
+  return response;
 }) satisfies Handle;

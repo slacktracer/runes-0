@@ -1,1 +1,1 @@
-export const symbolForWebSocketServer = Symbol.for('SvelteKitWebsocketServer');
+export const symbolForWebSocketServer = Symbol.for("SvelteKitWebsocketServer");
