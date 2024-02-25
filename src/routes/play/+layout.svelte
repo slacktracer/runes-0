@@ -27,7 +27,6 @@
   </ul>
 </main>
 
-layout here
 <slot />
 
 <style>

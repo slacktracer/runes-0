@@ -25,16 +25,12 @@
   });
 </script>
 
-page here
+<br>
+
 <button class="inc-button" on:click={increment}>Increment</button>
 
 <h1>{$local.value}</h1>
 
-<br />
-<br />
-<br />
-<br />
-<br />
 <br />
 
 <button on:click={reset}>Reset</button>
