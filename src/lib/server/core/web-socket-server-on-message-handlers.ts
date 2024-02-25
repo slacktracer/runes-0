@@ -1,5 +1,5 @@
-import type { WebSocketPlusSocketID } from '../web-socket/types/WebSocketPlusSocketID.js';
-import type { WebSocketServerOnMessageHandlerParameter } from '../web-socket/types/WebSocketServerOnMessageHandlerParameter.js';
+import type { WebSocketPlusSocketID } from '../web-socket-server/types/WebSocketPlusSocketID.js';
+import type { WebSocketServerOnMessageHandlerParameter } from '../web-socket-server/types/WebSocketServerOnMessageHandlerParameter.js';
 
 let fiftyFirstGame = 0;
 

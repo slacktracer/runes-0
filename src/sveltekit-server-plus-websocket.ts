@@ -1,7 +1,7 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { onHttpServerUpgrade } from './lib/server/web-socket/on-http-server-upgrade.js';
-import { createWebSocketServerGlobalInstance } from './lib/server/web-socket/create-web-socket-server-global-instance.js';
+import { onHttpServerUpgrade } from './lib/server/web-socket-server/on-http-server-upgrade.js';
+import { createWebSocketServerGlobalInstance } from './lib/server/web-socket-server/create-web-socket-server-global-instance.js';
 
 const directory = dirname(fileURLToPath(import.meta.url));
 
