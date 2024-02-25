@@ -8,6 +8,4 @@ export const createWebSocketServerGlobalInstance = () => {
 
 	(global as GlobalPlusWebSocketServer)[symbolForWebSocketServer] =
 		webSocketServer as WebSocketServerPlusSocketID;
-
-	return webSocketServer;
 };

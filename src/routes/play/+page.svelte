@@ -30,15 +30,14 @@ page here
 
 <h1>{$local.value}</h1>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 <button on:click={reset}>Reset</button>
-
 
 <style>
 	.inc-button {

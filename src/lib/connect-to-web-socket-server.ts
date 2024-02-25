@@ -1,6 +1,6 @@
-let webSocketEstablished = false;
+let openingWebSocket = false;
 let webSocket: WebSocket | null = null;
-let running = false;
+let webSocketEstablished = false;
 
 import { local } from './local.js';
 
@@ -9,11 +9,11 @@ export const connectToWebSocketServer = () => {
 		return;
 	}
 
-	if (running) {
+	if (openingWebSocket) {
 		return webSocket;
 	}
 
-	running = true;
+	openingWebSocket = true;
 
 	if (webSocketEstablished) {
 		return webSocket;
@@ -26,6 +26,8 @@ export const connectToWebSocketServer = () => {
 	webSocket.addEventListener('open', (event) => {
 		webSocketEstablished = true;
 
+		openingWebSocket = false;
+
 		console.log('[webSocket] connection open', event);
 	});
 
@@ -34,12 +36,11 @@ export const connectToWebSocketServer = () => {
 	});
 
 	webSocket.addEventListener('message', (event) => {
-		const parsed = JSON.parse(event?.data);
-		console.log('[webSocket] message received', parsed);
+		const parsedData = JSON.parse(event?.data);
 
-		if (parsed.type === 'increment') {
+		if (parsedData.type === 'increment') {
 			local.update((state) => {
-				state.value = parsed.value;
+				state.value = parsedData.value;
 
 				return state;
 			});
