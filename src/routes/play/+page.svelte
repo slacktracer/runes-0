@@ -25,7 +25,7 @@
   });
 </script>
 
-<br>
+<br />
 
 <button class="inc-button" on:click={increment}>Increment</button>
 
