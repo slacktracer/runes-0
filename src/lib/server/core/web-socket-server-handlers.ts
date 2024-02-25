@@ -1,5 +1,5 @@
-import type { WebSocketServerHandlers } from '../web-socket-server/types/WebSockerServerHandlers.js';
 import { isWebsocketMessage } from '../web-socket-server/is-websocket-message.js';
+import type { WebSocketServerHandlers } from '../web-socket-server/types/WebSockerServerHandlers.js';
 import { webSocketServerOnMessageHandlers } from './web-socket-server-on-message-handlers.js';
 
 export const webSocketServerHandlers: WebSocketServerHandlers = {

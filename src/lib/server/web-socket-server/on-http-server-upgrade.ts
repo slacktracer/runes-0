@@ -1,6 +1,7 @@
-import { parse } from 'url';
 import type { IncomingMessage } from 'http';
 import type { Duplex } from 'stream';
+import { parse } from 'url';
+
 import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
 

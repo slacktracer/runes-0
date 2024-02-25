@@ -1,5 +1,6 @@
-import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import { WebSocketServer } from 'ws';
+
+import { symbolForWebSocketServer } from './symbol-for-web-socket-server.js';
 import type { GlobalPlusWebSocketServer } from './types/GlobalPlusWebSocketServer.js';
 import type { WebSocketServerPlusSocketID } from './types/WebSocketServerPlusSocketID.js';
 
