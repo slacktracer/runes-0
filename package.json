@@ -3,14 +3,15 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest",
-		"lint": "prettier --check . && eslint .",
+		"dev": "vite dev",
 		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"preview": "vite preview",
+		"start": "npm run dev",
+		"test": "vitest",
 		"x": "tsx ./src/sveltekit-server-plus-web-socket-server.ts"
 	},
 	"devDependencies": {
