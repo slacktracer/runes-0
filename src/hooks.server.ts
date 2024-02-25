@@ -3,7 +3,7 @@ import { startWebSocketServer } from './lib/server/web-socket-server/start-web-s
 import { webSocketServerHandlers } from './lib/server/core/web-socket-server-handlers.js';
 
 export const handle = (async ({ event, resolve }) => {
-	startWebSocketServer({ handlers: webSocketServerHandlers });
+	startWebSocketServer({ webSocketServerHandlers });
 
 	const response = await resolve(event, {
 		filterSerializedResponseHeaders: (name) => name === 'content-type'
