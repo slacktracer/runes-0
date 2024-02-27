@@ -6,7 +6,7 @@
     "build": "vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "dev": "vite dev",
+    "dev": "vite dev --host",
     "format": "prettier --write .",
     "lint": "prettier --write . && eslint --fix .",
     "preview": "vite preview",
@@ -39,6 +39,7 @@
   },
   "type": "module",
   "dependencies": {
+    "lazy-brush": "^2.0.1",
     "nanoid": "^5.0.6",
     "tsx": "^4.7.1",
     "ws": "^8.16.0"
