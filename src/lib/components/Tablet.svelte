@@ -2,76 +2,44 @@
   import { onMount } from "svelte";
 
   import { draw } from "./Tablet/draw.js";
-  import { makeStylus } from "./Tablet/make-stylus.js";
   import { move } from "./Tablet/move.js";
-  import type { Point } from "./Tablet/Point.js";
+  import { start } from "./Tablet/start.js";
+  import { stop } from "./Tablet/stop.js";
+  import { tablet } from "./Tablet/tablet-store.js";
 
   let canvas: HTMLCanvasElement;
   let container: HTMLDivElement;
 
-  let raf;
+  let raf: number;
 
   let canvasHeight: number;
   let canvasWidth: number;
 
   onMount(() => {
-    let startX;
-    let startY;
-
-    let isPainting = false;
-
     let lineWidth = 25;
 
     const context = canvas.getContext("2d");
 
-    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const ratio = 1; //Math.max(window.devicePixelRatio || 1, 1);
 
     canvasHeight = container.clientHeight * ratio;
     canvasWidth = container.clientWidth * ratio;
 
-    const points: Point[] = [];
-
     if (context) {
-      context.strokeStyle = "rgb(234, 88, 12)";
+      context.strokeStyle = $tablet.runeColour;
 
       context.lineWidth = lineWidth;
 
       context.lineCap = "round";
 
-      const start = (event: TouchEvent) => {
-        isPainting = true;
-
-        points.length = 0;
-
-        [{ clientX: startX, clientY: startY }] = event.touches;
-
-        context.moveTo(startX, startY);
-      };
-
-      const stop = () => {
-        isPainting = false;
-
-        draw(context, points);
-
-        context.beginPath();
-      };
-
-      const stylus = makeStylus({ x: 0, y: 0 });
-
-      const moveEventListener = (event: TouchEvent) => {
-        if (isPainting) {
-          move({ event, points, stylus });
-        }
-      };
-
       canvas.addEventListener("touchstart", start);
       canvas.addEventListener("touchend", stop);
-      canvas.addEventListener("touchmove", moveEventListener);
+      canvas.addEventListener("touchmove", move);
 
       const loop = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        draw(context, points);
+        draw(context, $tablet.rune);
 
         raf = requestAnimationFrame(loop);
       };
@@ -85,14 +53,52 @@
   });
 </script>
 
-<div class="container" bind:this={container}>
+<div class="container grid" bind:this={container}>
   <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 </div>
 
 <style>
   .container {
-    border: 1px dashed dimgray;
-    height: 75dvh;
+    height: 580px;
+  }
+
+  /*
+  .checkerboard {
+    --color: rgba(12, 155, 233, 0.05);
+    --opacity: 0.05;
+    --size: 120px;
+
+    background-image: linear-gradient(
+        45deg,
+        var(--color) 25%,
+        transparent 25%,
+        transparent 75%,
+        var(--color) 75%,
+        var(--color)
+      ),
+      linear-gradient(
+        45deg,
+        var(--color) 25%,
+        transparent 25%,
+        transparent 75%,
+        var(--color) 75%,
+        var(--color)
+      );
+    background-position:
+      0 0,
+      calc(var(--size) / 2) calc(var(--size) / 2);
+    background-size: var(--size) var(--size);
+  }
+*/
+
+  .grid {
+    --color: rgba(69, 78, 247, 0.2);
+    --size: 40px;
+
+    background-image: linear-gradient(var(--color) 1px, transparent 1px),
+      linear-gradient(to right, var(--color) 1px, transparent 1px);
+    background-position: center center;
+    background-size: var(--size) var(--size);
   }
 
   canvas {
