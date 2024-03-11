@@ -39,4 +39,13 @@ export const webSocketServerOnMessageHandlers = {
       socket.send(JSON.stringify({ type: "increment", value: fiftyFirstGame }));
     });
   },
+
+  rune: ({
+    data,
+    webSocketServer,
+  }: WebSocketServerOnMessageHandlerParameter) => {
+    webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
+      socket.send(JSON.stringify({ data, type: "rune" }));
+    });
+  },
 };

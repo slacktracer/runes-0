@@ -1,11 +1,14 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
+  import { connectToWebSocketServer } from "../../lib/connect-to-web-socket-server.js";
   import { draw } from "./Tablet/draw.js";
   import { move } from "./Tablet/move.js";
   import { start } from "./Tablet/start.js";
   import { stop } from "./Tablet/stop.js";
   import { tablet } from "./Tablet/tablet-store.js";
+
+  connectToWebSocketServer();
 
   let canvas: HTMLCanvasElement;
   let container: HTMLDivElement;
@@ -39,7 +42,7 @@
       const loop = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        draw(context, $tablet.rune);
+        draw({ context, rune: $tablet.rune, runeColour: $tablet.runeColour });
 
         raf = requestAnimationFrame(loop);
       };
@@ -92,7 +95,7 @@
 */
 
   .grid {
-    --color: rgba(69, 78, 247, 0.2);
+    --color: rgba(0, 60, 255, 0.2);
     --size: 40px;
 
     background-image: linear-gradient(var(--color) 1px, transparent 1px),
@@ -104,4 +107,19 @@
   canvas {
     touch-action: none;
   }
+
+  /*html {
+    --s: 37px; !* control the size *!
+
+    --c:#0000,#2FB8AC .5deg 119.5deg,#0000 120deg;
+    --g1:conic-gradient(from  60deg at 56.25% calc(425%/6),var(--c));
+    --g2:conic-gradient(from 180deg at 43.75% calc(425%/6),var(--c));
+    --g3:conic-gradient(from -60deg at 50%   calc(175%/12),var(--c));
+    background:
+      var(--g1),var(--g1) var(--s) calc(1.73*var(--s)),
+      var(--g2),var(--g2) var(--s) calc(1.73*var(--s)),
+      var(--g3) var(--s) 0,var(--g3) 0 calc(1.73*var(--s))
+      #ECBE13;
+    background-size: calc(2*var(--s)) calc(3.46*var(--s));
+  }*/
 </style>

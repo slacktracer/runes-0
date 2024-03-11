@@ -1,12 +1,20 @@
 import type { Point } from "../../types/Point.js";
 import { getMidPoint } from "./get-mid-point.js";
 
-export const draw = (context: CanvasRenderingContext2D, rune: Point[]) => {
+export const draw = ({
+  context,
+  rune,
+  runeColour,
+}: {
+  context: CanvasRenderingContext2D;
+  rune: Point[];
+  runeColour: string;
+}) => {
   if (rune.length < 2) {
     return;
   }
 
-  context.strokeStyle = "rgb(234, 88, 12)";
+  context.strokeStyle = runeColour;
 
   context.lineWidth = 25;
 

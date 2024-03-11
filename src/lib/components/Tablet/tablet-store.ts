@@ -8,12 +8,14 @@ type TabletState = {
   isBeingCarved: boolean;
   rune: Point[];
   runeColour: string;
+  runeFinished: boolean;
   stylus: LazyBrush;
 };
 
 export const tablet = writable<TabletState>({
   isBeingCarved: false,
   rune: [],
-  runeColour: "rgb(234, 88, 12)",
+  runeColour: "rgba(255, 195, 0, 1)",
+  runeFinished: false,
   stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
 });

@@ -3,6 +3,14 @@ import { get } from "svelte/store";
 import { tablet } from "./tablet-store.js";
 
 export const start = (event: TouchEvent) => {
+  const tabletStore = get(tablet);
+
+  const { runeFinished } = tabletStore;
+
+  if (runeFinished) {
+    return;
+  }
+
   tablet.update((state) => {
     state.isBeingCarved = true;
 
@@ -11,7 +19,7 @@ export const start = (event: TouchEvent) => {
     return state;
   });
 
-  const { stylus } = get(tablet);
+  const { stylus } = tabletStore;
 
   const [{ clientX: x, clientY: y }] = event.changedTouches;
 
