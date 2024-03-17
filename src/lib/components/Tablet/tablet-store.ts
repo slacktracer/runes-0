@@ -15,7 +15,8 @@ type TabletState = {
 export const tablet = writable<TabletState>({
   isBeingCarved: false,
   rune: [],
-  runeColour: "rgba(255, 195, 0, 1)",
+  runeColour: "hsla(46, 100%, 50%, 1)",
+  // runeColour: "hsla(355, 100%, 50%, 1)",
   runeFinished: false,
   stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
 });
