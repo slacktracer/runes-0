@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { connectToWebSocketServer } from "../../lib/connect-to-web-socket-server.js";
-  import { draw } from "./Tablet/draw.js";
-  import { move } from "./Tablet/move.js";
-  import { start } from "./Tablet/start.js";
-  import { stop } from "./Tablet/stop.js";
-  import { tablet } from "./Tablet/tablet-store.js";
+  import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
+  import { draw } from "./draw.js";
+  import { move } from "./move.js";
+  import { start } from "./start.js";
+  import { stop } from "./stop.js";
+  import { tablet } from "./tablet-store.js";
 
   connectToWebSocketServer();
 
