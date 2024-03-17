@@ -1,3 +1,6 @@
 <h1>Welcome to Runes</h1>
 
-<p><a href="/play">Play</a></p>
+<ul>
+  <li><a href="/play">Tabula</a></li>
+  <li><a href="/hinges">Hinges</a></li>
+</ul>
