@@ -24,7 +24,7 @@
 </main>
 
 <div style="text-align: center">
-  <button on:click={turn}>Switch</button>
+  <button on:click={turn} style="font-size: 5rem">Switch</button>
 </div>
 
 <style>
