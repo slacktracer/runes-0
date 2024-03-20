@@ -56,7 +56,7 @@
   });
 </script>
 
-<div class="container grid" bind:this={container}>
+<div class="container" bind:this={container}>
   <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 </div>
 
