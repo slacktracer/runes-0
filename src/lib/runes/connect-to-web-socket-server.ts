@@ -2,7 +2,7 @@ let openingWebSocket = false;
 let webSocket: WebSocket | null = null;
 let webSocketEstablished = false;
 
-import { tablet } from "./components/Tablet/tablet-store.js";
+import { tablet } from "./components/BSide/tablet-store.js";
 import { local } from "./local.js";
 
 export const connectToWebSocketServer = () => {

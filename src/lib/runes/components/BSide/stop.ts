@@ -16,8 +16,6 @@ export const stop = () => {
     tablet.update((state) => {
       state.runeFinished = false;
 
-      state.rune = [];
-
       return state;
     });
 

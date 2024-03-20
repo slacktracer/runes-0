@@ -42,10 +42,12 @@ export const webSocketServerOnMessageHandlers = {
 
   rune: ({
     data,
+    webSocket,
     webSocketServer,
   }: WebSocketServerOnMessageHandlerParameter) => {
     webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
-      socket.send(JSON.stringify({ data, type: "rune" }));
+      webSocket.socketID !== socket.socketID &&
+        socket.send(JSON.stringify({ data, type: "rune" }));
     });
   },
 };
