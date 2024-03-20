@@ -1,6 +1,6 @@
 import { json } from "@sveltejs/kit";
 
-import { webSocketServer } from "../../lib/server/web-socket-server/web-socket-server.js";
+import { webSocketServer } from "../../lib/runes/server/web-socket-server/web-socket-server.js";
 import type { RequestHandler } from "./$types";
 
 export const GET = (async ({ url }) => {
