@@ -1,7 +1,25 @@
 import { writable } from "svelte/store";
 
+import { makeStylus } from "./components/Tablet/make-stylus.js";
+import type { LazyBrush } from "./types/LazyBrush.js";
+import type { Point } from "./types/Point.js";
+
 type LocalState = {
-  value: number;
+  isBeingCarved: boolean;
+  rune: Point[];
+  runeColour: string;
+  incomingRune: Point[];
+  incomingRuneColour: string;
+  runeFinished: boolean;
+  stylus: LazyBrush;
 };
 
-export const local = writable<LocalState>({ value: 0 } as LocalState);
+export const local = writable<LocalState>({
+  isBeingCarved: false,
+  rune: [],
+  runeColour: "hsla(46, 100%, 50%, 1)",
+  incomingRune: [],
+  incomingRuneColour: "hsla(355, 100%, 50%, 1)",
+  runeFinished: false,
+  stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
+});

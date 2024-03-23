@@ -1,9 +1,9 @@
 import { get } from "svelte/store";
 
-import { tablet } from "./tablet-store.js";
+import { local } from "../../local.js";
 
 export const move = (event: TouchEvent) => {
-  const { isBeingCarved, stylus } = get(tablet);
+  const { isBeingCarved, stylus } = get(local);
 
   if (isBeingCarved && event.target instanceof HTMLCanvasElement) {
     const rect = event.target.getBoundingClientRect();
@@ -20,7 +20,7 @@ export const move = (event: TouchEvent) => {
 
     const { x: stylusX, y: stylusY } = stylus.getBrushCoordinates();
 
-    tablet.update((state) => {
+    local.update((state) => {
       state.rune.push({ x: stylusX, y: stylusY });
 
       return state;

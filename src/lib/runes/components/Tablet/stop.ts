@@ -1,10 +1,10 @@
 import { get } from "svelte/store";
 
+import { local } from "../../local.js";
 import { launch } from "./launch.js";
-import { tablet } from "./tablet-store.js";
 
 export const stop = () => {
-  const tabletStore = get(tablet);
+  const tabletStore = get(local);
 
   const { runeFinished } = tabletStore;
 
@@ -13,7 +13,7 @@ export const stop = () => {
 
     launch({ rune });
 
-    tablet.update((state) => {
+    local.update((state) => {
       state.runeFinished = false;
 
       state.rune = [];
@@ -24,7 +24,7 @@ export const stop = () => {
     return;
   }
 
-  tablet.update((state) => {
+  local.update((state) => {
     state.isBeingCarved = false;
 
     state.runeFinished = true;

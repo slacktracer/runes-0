@@ -1,19 +1,19 @@
 import { get } from "svelte/store";
 
-import { launch } from "./launch.js";
-import { tablet } from "./tablet-store.js";
+import { local } from "../../local.js";
+// import { launch } from "./launch.js";
 
 export const stop = () => {
-  const tabletStore = get(tablet);
+  const tabletStore = get(local);
 
   const { runeFinished } = tabletStore;
 
   if (runeFinished) {
-    const { rune } = tabletStore;
+    // const { rune } = tabletStore;
 
-    launch({ rune });
+    // launch({ rune });
 
-    tablet.update((state) => {
+    local.update((state) => {
       state.runeFinished = false;
 
       return state;
@@ -22,7 +22,7 @@ export const stop = () => {
     return;
   }
 
-  tablet.update((state) => {
+  local.update((state) => {
     state.isBeingCarved = false;
 
     state.runeFinished = true;

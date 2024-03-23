@@ -1,9 +1,9 @@
 import { get } from "svelte/store";
 
-import { tablet } from "./tablet-store.js";
+import { local } from "../../local.js";
 
 export const start = (event: TouchEvent) => {
-  const tabletStore = get(tablet);
+  const tabletStore = get(local);
 
   const { runeFinished } = tabletStore;
 
@@ -11,7 +11,7 @@ export const start = (event: TouchEvent) => {
     return;
   }
 
-  tablet.update((state) => {
+  local.update((state) => {
     state.isBeingCarved = true;
 
     state.rune.length = 0;

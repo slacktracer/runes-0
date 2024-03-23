@@ -2,7 +2,6 @@ let openingWebSocket = false;
 let webSocket: WebSocket | null = null;
 let webSocketEstablished = false;
 
-import { tablet } from "./components/BSide/tablet-store.js";
 import { local } from "./local.js";
 
 export const connectToWebSocketServer = () => {
@@ -39,17 +38,9 @@ export const connectToWebSocketServer = () => {
   webSocket.addEventListener("message", (event) => {
     const parsedData = JSON.parse(event?.data);
 
-    if (parsedData.type === "increment") {
-      local.update((state) => {
-        state.value = parsedData.value;
-
-        return state;
-      });
-    }
-
     if (parsedData.type === "rune") {
-      tablet.update((state) => {
-        state.rune = parsedData.data.data;
+      local.update((state) => {
+        state.incomingRune = parsedData.data.data;
 
         return state;
       });

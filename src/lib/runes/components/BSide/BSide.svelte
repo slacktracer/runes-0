@@ -2,11 +2,11 @@
 	import { onMount } from "svelte";
 
 	import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
+	import { local } from "../../local.js";
 	import { draw } from "./draw.js";
 	import { move } from "./move.js";
 	import { start } from "./start.js";
 	import { stop } from "./stop.js";
-	import { tablet } from "./tablet-store.js";
 
 	connectToWebSocketServer();
 
@@ -29,7 +29,7 @@
 		canvasWidth = container.clientWidth * ratio;
 
 		if (context) {
-			context.strokeStyle = $tablet.runeColour;
+			context.strokeStyle = $local.incomingRuneColour;
 
 			context.lineWidth = lineWidth;
 
@@ -42,7 +42,7 @@
 			const loop = () => {
 				context.clearRect(0, 0, canvas.width, canvas.height);
 
-				draw({ context, rune: $tablet.rune, runeColour: $tablet.runeColour });
+				draw({ context, rune: $local.incomingRune, runeColour: $local.incomingRuneColour });
 
 				raf = requestAnimationFrame(loop);
 			};
