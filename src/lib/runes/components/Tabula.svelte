@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Swipe from './Swipe.svelte';
+  import Swipe from "./Swipe.svelte";
 
   let aSide = true;
   let bSide = false;

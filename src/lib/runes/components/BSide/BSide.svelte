@@ -1,73 +1,82 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
-	import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
-	import { local } from "../../local.js";
-	import { draw } from "./draw.js";
-	import { move } from "./move.js";
-	import { start } from "./start.js";
-	import { stop } from "./stop.js";
+  import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
+  import { local } from "../../local.js";
+  import { draw } from "./draw.js";
+  import { move } from "./move.js";
+  import { start } from "./start.js";
+  import { stop } from "./stop.js";
 
-	connectToWebSocketServer();
+  connectToWebSocketServer();
 
-	let canvas: HTMLCanvasElement;
-	let container: HTMLDivElement;
+  let canvas: HTMLCanvasElement;
+  let container: HTMLDivElement;
 
-	let raf: number;
+  let raf: number;
 
-	let canvasHeight: number;
-	let canvasWidth: number;
+  let canvasHeight: number;
+  let canvasWidth: number;
 
-	onMount(() => {
-		let lineWidth = 25;
+  onMount(() => {
+    let lineWidth = 25;
 
-		const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d");
 
-		const ratio = 1; //Math.max(window.devicePixelRatio || 1, 1);
+    const ratio = 1; //Math.max(window.devicePixelRatio || 1, 1);
 
-		canvasHeight = container.clientHeight * ratio;
-		canvasWidth = container.clientWidth * ratio;
+    canvasHeight = container.clientHeight * ratio;
+    canvasWidth = container.clientWidth * ratio;
 
-		if (context) {
-			context.strokeStyle = $local.incomingRuneColour;
+    if (context) {
+      context.strokeStyle = $local.incomingRuneColour;
 
-			context.lineWidth = lineWidth;
+      context.lineWidth = lineWidth;
 
-			context.lineCap = "round";
+      context.lineCap = "round";
 
-			canvas.addEventListener("touchstart", start);
-			canvas.addEventListener("touchend", stop);
-			canvas.addEventListener("touchmove", move);
+      canvas.addEventListener("touchstart", start);
+      canvas.addEventListener("touchend", stop);
+      canvas.addEventListener("touchmove", move);
 
-			const loop = () => {
-				context.clearRect(0, 0, canvas.width, canvas.height);
+      const loop = () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
 
-				draw({ context, rune: $local.incomingRune, runeColour: $local.incomingRuneColour });
+        draw({
+          context,
+          rune: $local.incomingRune,
+          runeColour: $local.incomingRuneColour,
+        });
 
-				draw({ context, lineWidth: 50, rune: $local.counterRune, runeColour: $local.counterRuneColour });
+        draw({
+          context,
+          lineWidth: 50,
+          rune: $local.counterRune,
+          runeColour: $local.counterRuneColour,
+        });
 
-				raf = requestAnimationFrame(loop);
-			};
+        raf = requestAnimationFrame(loop);
+      };
 
-			loop();
-		}
+      loop();
+    }
 
-		return () => {
-			cancelAnimationFrame(raf);
-		};
-	});
+    return () => {
+      cancelAnimationFrame(raf);
+    };
+  });
 </script>
 
 <div class="container" bind:this={container}>
-	<canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
+  <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 </div>
 
 <style>
-    .container {
-        height: 580px;
-    }
+  .container {
+    height: 580px;
+  }
 
-    /*
+  /*
 		.checkerboard {
 			--color: rgba(12, 155, 233, 0.05);
 			--opacity: 0.05;
@@ -96,21 +105,21 @@
 		}
 	*/
 
-    .grid {
-        --color: rgba(0, 60, 255, 0.2);
-        --size: 40px;
+  .grid {
+    --color: rgba(0, 60, 255, 0.2);
+    --size: 40px;
 
-        background-image: linear-gradient(var(--color) 1px, transparent 1px),
-        linear-gradient(to right, var(--color) 1px, transparent 1px);
-        background-position: center center;
-        background-size: var(--size) var(--size);
-    }
+    background-image: linear-gradient(var(--color) 1px, transparent 1px),
+      linear-gradient(to right, var(--color) 1px, transparent 1px);
+    background-position: center center;
+    background-size: var(--size) var(--size);
+  }
 
-    canvas {
-        touch-action: none;
-    }
+  canvas {
+    touch-action: none;
+  }
 
-    /*html {
+  /*html {
 			--s: 37px; !* control the size *!
 
 			--c:#0000,#2FB8AC .5deg 119.5deg,#0000 120deg;
