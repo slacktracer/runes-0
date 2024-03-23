@@ -3,9 +3,9 @@ import { get } from "svelte/store";
 import { local } from "../../local.js";
 
 export const start = (event: TouchEvent) => {
-  const tabletStore = get(local);
+  const localStore = get(local);
 
-  const { runeFinished } = tabletStore;
+  const { runeFinished } = localStore;
 
   if (runeFinished) {
     return;
@@ -19,7 +19,7 @@ export const start = (event: TouchEvent) => {
     return state;
   });
 
-  const { stylus } = tabletStore;
+  const { stylus } = localStore;
 
   const [{ clientX: x, clientY: y }] = event.changedTouches;
 

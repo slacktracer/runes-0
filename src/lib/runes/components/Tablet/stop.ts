@@ -4,12 +4,12 @@ import { local } from "../../local.js";
 import { launch } from "./launch.js";
 
 export const stop = () => {
-  const tabletStore = get(local);
+  const localStore = get(local);
 
-  const { runeFinished } = tabletStore;
+  const { runeFinished } = localStore;
 
   if (runeFinished) {
-    const { rune } = tabletStore;
+    const { rune } = localStore;
 
     launch({ rune });
 
@@ -32,7 +32,7 @@ export const stop = () => {
     return state;
   });
 
-  const { stylus } = tabletStore;
+  const { stylus } = localStore;
 
   const { x, y } = stylus.getBrushCoordinates();
 
