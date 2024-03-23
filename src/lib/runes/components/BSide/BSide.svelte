@@ -44,6 +44,8 @@
 
 				draw({ context, rune: $local.incomingRune, runeColour: $local.incomingRuneColour });
 
+				draw({ context, lineWidth: 50, rune: $local.counterRune, runeColour: $local.counterRuneColour });
+
 				raf = requestAnimationFrame(loop);
 			};
 

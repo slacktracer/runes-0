@@ -3,10 +3,12 @@ import { getMidPoint } from "./get-mid-point.js";
 
 export const draw = ({
   context,
+  lineWidth = 25,
   rune,
   runeColour,
 }: {
   context: CanvasRenderingContext2D;
+  lineWidth?: number;
   rune: Point[];
   runeColour: string;
 }) => {
@@ -16,7 +18,7 @@ export const draw = ({
 
   context.strokeStyle = runeColour;
 
-  context.lineWidth = 25;
+  context.lineWidth = lineWidth;
 
   context.lineCap = "round";
 
