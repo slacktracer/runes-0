@@ -1,5 +1,5 @@
+import { getMidPoint } from "../../get-mid-point.js";
 import type { Point } from "../../types/Point.js";
-import { getMidPoint } from "./get-mid-point.js";
 
 export const draw = ({
   context,
