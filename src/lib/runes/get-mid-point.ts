@@ -1,4 +1,4 @@
-import type { Point } from "../../types/Point.js";
+import type { Point } from "./types/Point.js";
 
 export const getMidPoint = (pointA: Point, pointB: Point) => ({
   x: pointA.x + (pointB.x - pointA.x) / 2,

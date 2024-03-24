@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { connectToWebSocketServer } from "../../lib/connect-to-web-socket-server.js";
-  import { local } from "../../lib/local.js";
+  import { connectToWebSocketServer } from "../connect-to-web-socket-server.js";
+  import { local } from "../local.js";
 
   const webSocket = connectToWebSocketServer();
 
@@ -29,7 +29,7 @@
 
 <button class="inc-button" on:click={increment}>Increment</button>
 
-<h1>{$local.value}</h1>
+<h1>{"$local.value"}</h1>
 
 <br />
 
