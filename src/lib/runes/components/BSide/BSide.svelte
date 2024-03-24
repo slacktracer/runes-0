@@ -105,15 +105,15 @@
 		}
 	*/
 
-  .grid {
-    --color: rgba(0, 60, 255, 0.2);
-    --size: 40px;
-
-    background-image: linear-gradient(var(--color) 1px, transparent 1px),
-      linear-gradient(to right, var(--color) 1px, transparent 1px);
-    background-position: center center;
-    background-size: var(--size) var(--size);
-  }
+  /*.grid {*/
+  /*  --color: rgba(0, 60, 255, 0.2);*/
+  /*  --size: 40px;*/
+  /**/
+  /*  background-image: linear-gradient(var(--color) 1px, transparent 1px),*/
+  /*    linear-gradient(to right, var(--color) 1px, transparent 1px);*/
+  /*  background-position: center center;*/
+  /*  background-size: var(--size) var(--size);*/
+  /*}*/
 
   canvas {
     touch-action: none;
