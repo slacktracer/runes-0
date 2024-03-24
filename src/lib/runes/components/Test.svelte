@@ -1,6 +1,5 @@
 <script lang="ts">
   import { connectToWebSocketServer } from "../connect-to-web-socket-server.js";
-  import { local } from "../local.js";
 
   const webSocket = connectToWebSocketServer();
 
