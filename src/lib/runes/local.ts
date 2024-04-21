@@ -5,6 +5,9 @@ import type { LazyBrush } from "./types/LazyBrush.js";
 import type { Point } from "./types/Point.js";
 
 type LocalState = {
+  carvingCoolDown: number;
+  carvingEnergy: number;
+  carvingStarted: number;
   counterRune: Point[];
   counterRuneColour: string;
   counterStylus: LazyBrush;
@@ -18,6 +21,9 @@ type LocalState = {
 };
 
 export const local = writable<LocalState>({
+  carvingCoolDown: 0,
+  carvingEnergy: 2500,
+  carvingStarted: 0,
   counterRune: [],
   counterRuneColour: "hsla(178, 100%, 50%, 0.5)",
   counterStylus: makeStylus({ initialPoint: { x: 0, y: 0 }, radius: 0 }),

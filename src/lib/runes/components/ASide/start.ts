@@ -14,6 +14,8 @@ export const start = (event: TouchEvent) => {
   local.update((state) => {
     state.isBeingCarved = true;
 
+    state.carvingStarted = Date.now();
+
     state.rune.length = 0;
 
     return state;

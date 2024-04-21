@@ -9,9 +9,10 @@ export const stop = () => {
   const { runeFinished } = localStore;
 
   if (runeFinished) {
-    // const { rune } = localStore;
+    const { counterRune } = localStore;
 
-    // launch({ rune });
+    // launch({ rune })
+    console.log(counterRune);
 
     local.update((state) => {
       state.runeFinished = false;

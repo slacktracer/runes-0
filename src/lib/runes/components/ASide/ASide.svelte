@@ -39,10 +39,43 @@
       canvas.addEventListener("touchend", stop);
       canvas.addEventListener("touchmove", move);
 
-      const loop = () => {
+      let previousTimeStamp: number | undefined;
+      let seconds = 0;
+
+      const loop = (timeStamp = 0) => {
+        if (previousTimeStamp === undefined) {
+          previousTimeStamp = timeStamp;
+        }
+
+        const elapsedTime = timeStamp - previousTimeStamp;
+
+        seconds += Math.floor(elapsedTime);
+
+        if ($local.carvingCoolDown > 0) {
+          $local.carvingCoolDown -= Math.floor(elapsedTime);
+
+          if ($local.carvingCoolDown <= 0) {
+            $local.carvingCoolDown = 0;
+          }
+        }
+
+        if ($local.carvingCoolDown <= 0) {
+          if (seconds >= 100) {
+            $local.carvingEnergy += 10;
+
+            if ($local.carvingEnergy > 2500) {
+              $local.carvingEnergy = 2500;
+            }
+
+            seconds = 0;
+          }
+        }
+
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         draw({ context, rune: $local.rune, runeColour: $local.runeColour });
+
+        previousTimeStamp = timeStamp;
 
         raf = requestAnimationFrame(loop);
       };

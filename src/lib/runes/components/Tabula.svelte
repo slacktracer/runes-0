@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { local } from "../local.js";
   import Swipe from "./Swipe.svelte";
 
   let aSide = true;
@@ -21,11 +22,27 @@
   </div>
 </main>
 
+<div class="energy">
+  <div style="width: {($local.carvingEnergy / 2500) * 100}%"></div>
+</div>
+
 <div class="swipe">
   <Swipe on:swipe={turn}></Swipe>
 </div>
 
 <style>
+  .energy {
+    border: 1px solid black;
+    height: 1rem;
+    margin-inline: 1rem;
+    margin-top: 1rem;
+  }
+
+  .energy div {
+    background: hsla(46, 100%, 50%, 1);
+    height: 1rem;
+  }
+
   .swipe {
     height: 7rem;
     margin-top: 1rem;
