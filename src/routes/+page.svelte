@@ -3,4 +3,5 @@
 <ul>
   <li><a href="/play">Tabula</a></li>
   <li><a href="/hinges">Hinges</a></li>
+  <li><a href="/touch">Touch</a></li>
 </ul>
