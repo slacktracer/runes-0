@@ -24,7 +24,34 @@ export const move = (event: TouchEvent) => {
     const { x: stylusX, y: stylusY } = counterStylus.getBrushCoordinates();
 
     local.update((state) => {
-      state.counterRune.push({ x: stylusX, y: stylusY });
+      state.counterRune.unshift({ x: stylusX, y: stylusY });
+
+      if (state.counterRune.length > 10) {
+        state.counterRune.length = 10;
+      }
+
+      state.counterRune.forEach(({ x, y }) => {
+        state.incomingRune.forEach((iRune) => {
+          if (iRune.length) {
+            const a = Math.hypot(x - iRune[0].x, y - iRune[0].y);
+
+            if (a < 50) {
+              iRune.splice(0, 1);
+            }
+          }
+
+          if (iRune.length) {
+            const b = Math.hypot(
+              x - iRune[iRune.length - 1].x,
+              y - iRune[iRune.length - 1].y,
+            );
+
+            if (b < 50) {
+              iRune.splice(iRune.length - 1, 1);
+            }
+          }
+        });
+      });
 
       return state;
     });

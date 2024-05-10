@@ -23,18 +23,6 @@
 
     const context = canvas.getContext("2d");
 
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-
-    for (let index = 0; index < imageData.data.length; index += 4) {
-      const rgba = [
-        imageData.data[index],
-        imageData.data[index + 1],
-        imageData.data[index + 2],
-        imageData.data[index + 3] / 255,
-      ];
-      console.log(rgba);
-    }
-
     const ratio = 1; //Math.max(window.devicePixelRatio || 1, 1);
 
     canvasHeight = container.clientHeight * ratio;
@@ -54,10 +42,12 @@
       const loop = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        draw({
-          context,
-          rune: $local.incomingRune,
-          runeColour: $local.incomingRuneColour,
+        $local.incomingRune.forEach((iRune) => {
+          draw({
+            context,
+            rune: iRune,
+            runeColour: $local.incomingRuneColour,
+          });
         });
 
         draw({

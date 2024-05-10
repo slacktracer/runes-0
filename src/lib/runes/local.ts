@@ -14,7 +14,7 @@ type LocalState = {
   isBeingCarved: boolean;
   rune: Point[];
   runeColour: string;
-  incomingRune: Point[];
+  incomingRune: Point[][];
   incomingRuneColour: string;
   runeFinished: boolean;
   stylus: LazyBrush;

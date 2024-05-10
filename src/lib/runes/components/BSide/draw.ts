@@ -24,21 +24,23 @@ export const draw = ({
 
   let [pointA, pointB] = rune;
 
-  context.moveTo(pointB.x, pointB.y);
+  if (pointA && pointB) {
+    context.moveTo(pointB.x, pointB.y);
 
-  context.beginPath();
+    context.beginPath();
 
-  for (let i = 1, len = rune.length; i < len; i++) {
-    const midPoint = getMidPoint(pointA, pointB);
+    for (let i = 1, len = rune.length; i < len; i++) {
+      const midPoint = getMidPoint(pointA, pointB);
 
-    context.quadraticCurveTo(pointA.x, pointA.y, midPoint.x, midPoint.y);
+      context.quadraticCurveTo(pointA.x, pointA.y, midPoint.x, midPoint.y);
 
-    pointA = rune[i];
+      pointA = rune[i];
 
-    pointB = rune[i + 1];
+      pointB = rune[i + 1];
+    }
+
+    context.lineTo(pointA.x, pointA.y);
+
+    context.stroke();
   }
-
-  context.lineTo(pointA.x, pointA.y);
-
-  context.stroke();
 };
