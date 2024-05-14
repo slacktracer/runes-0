@@ -1,11 +1,42 @@
+<script lang="ts">
+  let step = 0;
+
+  let go = () => {
+    if (step === 0) {
+      transitionable = true;
+    }
+
+    step = (step + 1) % 3;
+  };
+
+  let transitionable = true;
+
+  let end = () => {
+    if (step === 2) {
+      transitionable = false;
+      step = 0;
+    }
+  };
+</script>
+
 <div class="slice-container">
-  <div class="slice">
-    <div class="side front"></div>
+  <div
+    class:step-1={step === 1}
+    class:step-2={step === 2}
+    class:transitionable
+    class="slice"
+    on:transitionend={end}
+  >
+    <div class="side front">
+      <button class="go" on:click={go}></button>
+    </div>
     <div class="side left"></div>
     <div class="side top"></div>
     <div class="side bottom"></div>
     <div class="side right"></div>
-    <div class="side back"></div>
+    <div class="side back">
+      <button class="go" on:click={go}></button>
+    </div>
   </div>
 </div>
 
@@ -24,8 +55,6 @@
     --slice-thickness: 50px;
     --slice-width: 320px;
 
-    animation: rotate 1.5s linear;
-    animation-delay: 1s;
     display: flex;
     height: var(--slice-height);
     position: relative;
@@ -40,7 +69,6 @@
     display: flex;
     height: 100%;
     position: absolute;
-    transform-style: preserve-3d;
     width: 100%;
   }
 
@@ -100,12 +128,47 @@
       translateZ(calc(var(--slice-height) + (var(--slice-thickness) / -2)));
   }
 
-  @keyframes rotate {
-    from {
-      transform: rotateY(0) rotateX(0deg) rotateZ(0deg);
-    }
-    to {
-      transform: rotateY(360deg) rotateX(0deg) rotateZ(0deg);
-    }
+  .transitionable {
+    transition: transform 0.5s;
   }
+
+  .step-1 {
+    transform: rotateY(180deg);
+  }
+
+  .step-2 {
+    transform: rotateY(360deg);
+  }
+
+  .go {
+    all: unset;
+    background: linear-gradient(
+      to bottom right,
+      transparent 0%,
+      transparent 50%,
+      hsla(0, 0%, 67%, 0.1) 50%,
+      hsla(0, 0%, 67%, 0.1) 100%
+    );
+    bottom: 0;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    width: 30px;
+  }
+
+  /*.go-left {
+    all: unset;
+    background: linear-gradient(
+      to bottom left,
+      transparent 0%,
+      transparent 50%,
+      hsla(0, 0%, 67%, 0.1) 50%,
+      hsla(0, 0%, 67%, 0.1) 100%
+    );
+    bottom: 0;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    width: 30px;
+  }*/
 </style>

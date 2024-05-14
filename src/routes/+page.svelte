@@ -5,4 +5,5 @@
   <li><a href="/hinges">Hinges</a></li>
   <li><a href="/touch">Touch</a></li>
   <li><a href="/glass">Glass</a></li>
+  <li><a href="/rotate">Rotate</a></li>
 </ul>
