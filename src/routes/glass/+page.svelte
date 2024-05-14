@@ -1,41 +1,20 @@
 <script lang="ts">
-  let step = 0;
+  let rotated = false;
 
-  let go = () => {
-    if (step === 0) {
-      transitionable = true;
-    }
-
-    step = (step + 1) % 3;
-  };
-
-  let transitionable = true;
-
-  let end = () => {
-    if (step === 2) {
-      transitionable = false;
-      step = 0;
-    }
-  };
+  let turn = () => (rotated = !rotated);
 </script>
 
 <div class="slice-container">
-  <div
-    class:step-1={step === 1}
-    class:step-2={step === 2}
-    class:transitionable
-    class="slice"
-    on:transitionend={end}
-  >
+  <div class:rotated class="slice transitionable">
     <div class="side front">
-      <button class="go" on:click={go}></button>
+      <button class="turn-right" on:click={turn}></button>
     </div>
     <div class="side left"></div>
     <div class="side top"></div>
     <div class="side bottom"></div>
     <div class="side right"></div>
     <div class="side back">
-      <button class="go" on:click={go}></button>
+      <button class="turn-left" on:click={turn}></button>
     </div>
   </div>
 </div>
@@ -132,15 +111,11 @@
     transition: transform 0.5s;
   }
 
-  .step-1 {
+  .rotated {
     transform: rotateY(180deg);
   }
 
-  .step-2 {
-    transform: rotateY(360deg);
-  }
-
-  .go {
+  .turn-right {
     all: unset;
     background: linear-gradient(
       to bottom right,
@@ -156,7 +131,7 @@
     width: 30px;
   }
 
-  /*.go-left {
+  .turn-left {
     all: unset;
     background: linear-gradient(
       to bottom left,
@@ -170,5 +145,5 @@
     left: 0;
     position: absolute;
     width: 30px;
-  }*/
+  }
 </style>
