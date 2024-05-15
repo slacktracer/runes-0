@@ -95,7 +95,8 @@
 
 <style>
   .container {
-    height: 580px;
+    height: 600px;
+    width: 320px;
   }
 
   /*
